@@ -5,10 +5,10 @@ namespace App\Tests;
 use App\Product;
 use App\ProductCollection;
 use App\ProductFilteringStrategy;
-use App\ManufacturerFilter;
+use App\MaxPriceFilter;
 use PHPUnit\Framework\TestCase;
 
-class ManufacturerFilterTest extends TestCase
+class MaxPriceFilterTest extends TestCase
 {
     static $collection;
     public static function setUpBeforeClass(): void
@@ -29,9 +29,9 @@ class ManufacturerFilterTest extends TestCase
     public function testManufacturerFilter()
     {
         $this->assertSame(2, count(self::$collection->getProductsArray()));
-        self::$collection = self::$collection->filter(new ManufacturerFilter('Ламзурь'));
+        self::$collection = self::$collection->filter(new MaxPriceFilter(50));
         $this->assertSame(1, count(self::$collection->getProductsArray()));
         $productsArray = self::$collection->getProductsArray();
-        $this->assertSame('Мармелад', $productsArray[0]->name);
+        $this->assertSame('Шоколад', $productsArray[0]->name);
     }
 }

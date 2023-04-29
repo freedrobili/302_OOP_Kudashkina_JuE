@@ -15,6 +15,10 @@ class MaxPriceFilter implements ProductFilteringStrategy
     // ===================================
     public function filter(Product $product): bool
     {
-        return $this->maxPrice >= $product->sellingPrice;
+        if ($product->sellingPrice) {
+            return $this->maxPrice >= $product->sellingPrice;
+        } else {
+            return $this->maxPrice >= $product->listPrice;
+        }
     }
 }
